@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+jobs:
+  customize-image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: setup-tools
+      run: |
+        apt-get update
+        apt-get install libguestfs-tools -y
