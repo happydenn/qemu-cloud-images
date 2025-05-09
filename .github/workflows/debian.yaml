@@ -8,5 +8,5 @@ jobs:
       uses: actions/checkout@v4
     - name: setup-tools
       run: |
-        apt-get update
-        apt-get install libguestfs-tools -y
+        sudo apt-get update
+        sudo apt-get install libguestfs-tools -y
