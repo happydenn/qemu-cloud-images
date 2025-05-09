@@ -10,6 +10,9 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install libguestfs-tools -y
+    - name: fix-perms
+      run: |
+        sudo chmod +r /boot/vmlinuz-*
     - name: prepare-source
       run: |
         curl -fsSLO https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
