@@ -10,3 +10,18 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install libguestfs-tools -y
+    - name: prepare-source
+      run: |
+        curl -fsSLO https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
+    - name: customize
+      run: |
+        virt-customize -a debian-12-genericcloud-amd64.qcow2 \
+          --install qemu-guest-agent \
+          --run-command "apt-get autoremove --purge && apt-get clean" \
+          --truncate /etc/machine-id
+    - name: sparsify
+      run: |
+        virt-sparsify --compress --in-place debian-12-genericcloud-amd64.qcow2
+    - name: result
+      run: |
+        ls -l debian-12-genericcloud-amd64.qcow2
